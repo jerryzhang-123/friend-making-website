@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>player imformation</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+            .message-form {
+                background: #f5f5f5;
+                padding: 20px;
+                border-radius: 5px;
+                margin-bottom: 30px;
+            }
+            .message-form input, .message-form textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            .message-form button {
+                background: #4CAF50;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .message-form button:hover {
+                background: #45a049;
+            }
+            .messages {
+                margin-top: 20px;
+            }
+            .message {
+                border-bottom: 1px solid #eee;
+                padding: 15px 0;
+            }
+            .message h3 {
+                margin: 0 0 5px 0;
+                color: #333;
+            }
+            .message p {
+                margin: 0;
+                color: #666;
+            }
+            .message small {
+                color: #999;
+                font-size: 0.8em;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Message Board</h1>
+        
+        <!-- 留言表单 -->
+        <div class="message-form">
+            <h2>leave your id</h2>
+            <form id="messageForm">
+                <input type="text" id="name" placeholder="yourname" required>
+                <textarea id="content" rows="4" placeholder="imformation" required></textarea>
+                <button type="submit">submit</button>
+            </form>
+        </div>
+        
+        <!-- 留言列表 -->
+        <div class="messages" id="messageList">
+            <h2>massageList</h2>
+            <!-- 留言将通过JavaScript动态添加到这里 -->
+        </div>
+        
+        <script>
+            document.getElementById('messageForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 获取表单数据
+                const name = document.getElementById('name').value;
+                const content = document.getElementById('content').value;
+                const timestamp = new Date().toLocaleString();
+                
+                // 创建新的留言元素
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                messageDiv.innerHTML = `
+                    <h3>${name}</h3>
+                    <p>${content}</p>
+                    <small>${timestamp}</small>
+                `;
+                
+                // 添加到留言列表顶部
+                document.getElementById('messageList').appendChild(messageDiv);
+                
+                // 清空表单
+                document.getElementById('name').value = '';
+                document.getElementById('content').value = '';
+            });
+        </script>
+    </body>
+</html>
